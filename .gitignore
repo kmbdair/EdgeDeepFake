@@ -218,3 +218,26 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# EdgeDeepFake datasets
+data/raw/
+data/processed/
+*.mp4
+*.avi
+*.mov
+*.zip
+
+# Model checkpoints
+*.pth
+*.pt
+*.ckpt
+*.onnx
+
+# Python and notebooks
+__pycache__/
+.ipynb_checkpoints/
+.env
+
+# Experiment outputs
+runs/
+wandb/
