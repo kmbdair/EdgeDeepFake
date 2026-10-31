@@ -1,62 +1,141 @@
 
-# EdgeDeepFake
+# AttentiQ
 
-### Attention-Enhanced and Computationally Efficient Deep Learning for Deepfake Detection
+### Does Attention Survive Quantization?
+**Trustworthy Deepfake Detection at the Edge**
 
-**Course:** CS4085 — Deep Learning  
 **University:** Effat University  
-**Supervisor:** Dr. Naila Marir
+**College:** College of Engineering  
+**Course:** CS4085 — Deep Learning  
+**Supervisor:** Dr. Naila Marir  
+**Team:** AttentiQ
 
 ## Project Overview
 
-EdgeDeepFake investigates whether attention mechanisms can improve deepfake detection performance while model quantization reduces computational requirements.
+AttentiQ investigates whether attention mechanisms remain
+effective when deep learning models are compressed using
+INT8 quantization.
 
-The project compares three models:
+The project focuses on trustworthy and computationally
+efficient deepfake detection for resource-constrained devices.
 
-- **M0:** ResNet-18 baseline
-- **M1:** ResNet-18 with CBAM attention
-- **M2:** INT8-quantized version of M1
+Rather than measuring only accuracy and speed, AttentiQ
+also investigates attention fidelity: whether quantization
+changes the visual regions a detector focuses on.
 
-## Research Question
+## Research Questions
 
-Can CBAM improve the deepfake detection F1-score of ResNet-18, and can INT8 quantization reduce computational cost while preserving detection performance?
+1. Does CBAM improve deepfake detection compared with
+   ResNet-18 and channel-only SE attention?
+2. Can INT8 quantization reduce model size and inference
+   latency while preserving detection performance?
+3. Does quantization change attention maps, and can
+   quantization-friendly attention reduce this change?
+4. Does attention improve generalization to unseen datasets?
+
+## Models
+
+| ID | Architecture | Purpose |
+|---|---|---|
+| B1 | MesoNet (Meso-4) | Lightweight reference |
+| M0 | ResNet-18 (FP32) | Baseline |
+| C1 | SE-ResNet-18 (FP32) | Channel-attention control |
+| M1 | ResNet-18 + CBAM (FP32) | Attention enhancement |
+| M2 | M1 with post-training INT8 quantization | Efficiency |
+| M3 | ResNet-18 + QF-CBAM with QAT INT8 | Stretch goal |
 
 ## Datasets
 
-- FaceForensics++
-- DeepFake Detection Challenge (DFDC)
+**Primary:** FaceForensics++ (FF++)
 
-Dataset files are not stored in this repository.
+- Training, validation, and in-domain testing
+- c23 compression as primary evaluation
+- c40 compression as optional robustness evaluation
+
+**External:** Celeb-DF v2
+
+- Cross-dataset generalization testing
+
+**Fallback:** DFDC Preview
+
+Dataset files are not distributed through this repository.
 
 ## Evaluation Metrics
 
-- Accuracy and F1-score
-- Model size and parameter count
-- CPU inference latency
-- MACs/FLOPs
-- Memory usage
+### Detection Performance
+- AUC
+- F1-score
+- Accuracy
+- Precision and recall
+
+### Computational Efficiency
+- Model size
+- Parameter count
+- MACs
+- Peak memory usage
+- CPU and edge-device inference latency
+
+### Attention Fidelity
+- Attention-map cosine similarity
+- Top-20% attention-region IoU
+- Prediction-flip rate
+- Grad-CAM visualizations
+
+## Proposed Experimental Pipeline
+
+1. Prepare and preprocess facial video datasets.
+2. Train baseline and attention-based detectors.
+3. Apply post-training INT8 quantization to M1.
+4. Compare detection performance and computational costs.
+5. Analyze attention maps before and after quantization.
+6. Evaluate generalization on an external dataset.
+7. Test inference on edge hardware when available.
+8. Develop a demonstration of the accuracy-efficiency tradeoff.
+
+## Tools
+
+- Python
+- PyTorch and timm
+- torchao / ONNX Runtime
+- Google Colab
+- Google Drive
+- VS Code
+- GitHub
 
 ## Repository Structure
 
-- `data/` — Dataset preparation information
-- `notebooks/` — Google Colab experiments
-- `src/` — Model implementation and training code
-- `results/` — Experimental results and figures
-- `docs/` — Research documentation
+- `data/` — Dataset instructions and preprocessing details
+- `notebooks/` — Experiments and Colab notebooks
+- `src/` — Model, training, and evaluation code
+- `results/` — Metrics, plots, and attention visualizations
+- `docs/` — Research proposals and documentation
 
 ## Team Members
 
-- Kamar Bdair
-- Layan Ziyadah
-- Faisal Shamsi
-- Sedra Aljundi
+- Kamar Bdair — Data preparation and preprocessing
+- Layan Ziyadah — Model development and training
+- Faisal Shamsi — Quantization and edge benchmarking
+- Sedra Aljundi — Literature review, attention analysis,
+  evaluation, and documentation
+
+**Supervisor:** Dr. Naila Marir
 
 ## Project Status
 
-Stage 1: Research proposal completed.
+Research proposal completed.
 
-Stage 2: Dataset preparation and baseline implementation pending.
+Dataset preparation, baseline experiments, quantization,
+attention-fidelity evaluation, and edge deployment are planned.
+
+No experimental results are claimed at this stage.
+
+## Research Objective
+
+To investigate whether computational efficiency can be
+improved without losing the detection and attention
+benefits of attention-enhanced neural networks.
 
 ## Acknowledgment
 
-Developed as part of the CS4085 Deep Learning course at Effat University.
+Developed by Team AttentiQ at Effat University
+under the supervision of Dr. Naila Marir.
