@@ -219,7 +219,7 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# EdgeDeepFake datasets
+# AttentiQ datasets
 data/raw/
 data/processed/
 *.mp4
@@ -241,3 +241,20 @@ __pycache__/
 # Experiment outputs
 runs/
 wandb/
+
+# AttentiQ additional dataset and model formats
+*.mkv
+*.webm
+*.safetensors
+*.tflite
+*.engine
+
+# Local dataset and checkpoint folders
+datasets/
+checkpoints/
+models/checkpoints/
+
+# Sensitive dataset access information
+credentials/
+secrets/
+
